@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreLocation
-
+var count = 0
 
 class ViewController : UIViewController {
     
@@ -29,16 +29,42 @@ class ViewController : UIViewController {
             // Source JSON is here:
             // http://www1.toronto.ca/City%20Of%20Toronto/Information%20&%20Technology/Open%20Data/Data%20Sets/Assets/Files/greenPParking2015.json
             //
-            let json = try NSJSONSerialization.JSONObjectWithData(theData, options: NSJSONReadingOptions.AllowFragments) as! AnyObject
+            let json = try NSJSONSerialization.JSONObjectWithData(theData, options: NSJSONReadingOptions.AllowFragments) //as! AnyObject
             
 
-            print(json)
+          
+            print("")
+            print("====== the retrieved JSON is as follows ======")
+            //print(json)
             
-            
-            
-            
+            print("+++++++++++++++++++++++++++++++++++++++++++")
+            print("Now, add your parsing code here...")
 
             
+            guard let carparks : [String:AnyObject] = json as? [String: AnyObject]
+                else {
+                    print ("Could not find carpark")
+                    return
+            }
+            print(carparks)
+            print("Parse 1 completed")
+            
+             for count in carparks {
+                
+
+
+                guard let lat = carparks["lat"] else {
+                    print("could not find lat")
+                    return
+                }
+
+
+                print(lat)
+                print("Parce 2 not completed")
+               // i++
+            }
+            
+
             // Now we can update the UI
             // (must be done asynchronously)
             dispatch_async(dispatch_get_main_queue()) {
